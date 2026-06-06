@@ -1,0 +1,173 @@
+﻿Document 1: Networking Task 01
+
+
+Objective: To understand the basic components of a network and identify the network configuration of a device.
+Part A: Network Information
+
+
+* Hostname (Device Name): Desktop-DevStation
+* IPv4 Address: 192.168.1.45
+* MAC Address: 00:1A:2B:3C:4D:5E
+* Default Gateway: 192.168.1.1
+* DNS Server: 8.8.8.8 (Google DNS) and 1.1.1.1 (Cloudflare DNS)
+
+
+Placeholder: Insert screenshots of your system's network configuration settings here.
+Part B: Basic Networking Concepts
+* IP Address: An Internet Protocol (IP) address is a unique string of numbers separated by periods (IPv4) or colons (IPv6) that identifies a device on the internet or a local network. It is effectively the digital "mailing address" for a device.
+* MAC Address: A Media Access Control (MAC) address is a unique, physical identifier assigned to a network interface controller (NIC) by the manufacturer. Unlike an IP address, which can change, a MAC address is permanent to the hardware.
+* Default Gateway: This is the node (usually your router) that serves as an access point to other networks. If your device wants to send data to an IP address outside your local network (like a website), it sends it to the default gateway first.
+* DNS: The Domain Name System (DNS) is the phonebook of the internet. It translates human-readable web addresses (like google.com) into machine-readable IP addresses (like 142.250.190.46) so browsers can load internet resources.
+* Public IP vs Private IP: * Public IP: Assigned by your ISP, this is unique across the entire global internet and allows you to communicate with the outside world.
+   * Private IP: Assigned by your local router, this is used only within your internal home or business network to allow local devices to talk to each other securely without exposing them directly to the internet.
+Part C: Basic Network Diagram
+Below is a text-based representation of the network diagram showing how the device connects to the internet.
+
+
+
+
+
+
+Plaintext
+      [ The Internet ]
+            |
+            | (Public IP: 203.0.113.55)
+            v
+     [ Home Router / ISP Modem ] 
+     (Default Gateway: 192.168.1.1)
+            |
+            | (Wi-Fi or Ethernet)
+            v
+     [ Your Device ]
+     (Private IP: 192.168.1.45)
+
+Part D: Network Connectivity Test
+
+
+Windows Command Outputs
+
+
+Output for ping google.com:
+
+
+Pinging google.com [142.250.190.46] with 32 bytes of data:
+Reply from 142.250.190.46: bytes=32 time=14ms TTL=117
+Reply from 142.250.190.46: bytes=32 time=15ms TTL=117
+
+
+
+Output for tracert google.com:
+
+
+Tracing route to google.com [142.250.190.46] over a maximum of 30 hops:
+ 1    <1 ms    <1 ms    <1 ms  192.168.1.1
+ 2    10 ms    11 ms     9 ms  10.20.30.1
+ 3    14 ms    15ms     14 ms  142.250.190.46
+Trace complete.
+
+
+
+Answers to Questions:
+1. Was the ping successful?  Yes, the ping was successful. The command received replies from the destination server, indicating that the device can reach Google's servers.
+2. How many hops were shown?  In the dummy tracert output provided above, there were 3 hops. The first hop was the local router, the second was the ISP's infrastructure, and the final hop was the Google server.
+3. What is the purpose of traceroute?  Traceroute maps the exact journey a packet of data takes from your device to its destination. It records every router (hop) the data passes through and the time it takes between each, which is highly useful for diagnosing where a network delay or failure is occurring.
+Document 2: Networking Task 02
+
+
+Objective: To understand common network devices, IP addressing concepts, and how data travels within a network.
+Part A: Network Devices Research
+Device
+	Purpose
+	How it Works
+	Real-World Usage
+	1. Router
+	Connects multiple networks together and routes data between them.
+	It inspects the destination IP address of incoming data packets and determines the most efficient path to forward them to their destination.
+	Connecting your home Local Area Network (LAN) to the wider internet (WAN).
+	2. Switch
+	Connects multiple devices within a single local network.
+	It uses MAC addresses to forward data packets strictly to the specific device that requested them, rather than broadcasting to everyone.
+	Used in corporate offices to wire dozens of desktop computers and printers together efficiently.
+	3. Hub
+	A legacy device used to connect multiple devices in a local network.
+	It is a "dumb" device; when it receives data, it simply broadcasts copies of that data to all connected ports, causing network congestion.
+	Mostly obsolete today, but historically used for very small, cheap network setups.
+	4. Access Point
+	Provides wireless (Wi-Fi) connectivity to a wired network.
+	It connects directly to a router or switch via an Ethernet cable and projects a Wi-Fi signal to a designated area.
+	Used in large buildings, universities, or airports to extend Wi-Fi coverage across a wide physical area.
+	5. Firewall
+	Protects the network by filtering incoming and outgoing traffic.
+	It follows a set of pre-configured security rules to block malicious traffic and allow safe traffic, acting as a security guard between networks.
+	Deployed at the edge of corporate networks to prevent hackers from accessing internal company databases.
+	6. Modem
+	Translates data between your home network and the ISP's infrastructure.
+	It modulates digital signals from your router into analog signals for cables/phone lines, and demodulates incoming analog signals back into digital data.
+	The box your Internet Service Provider (ISP) gives you to connect your house to their fiber, cable, or DSL lines.
+	
+
+Part B: IP Address Classification
+1. 192.168.1.10  -> Private. Reason: This falls strictly into the Class C private IP range (192.168.0.0 – 192.168.255.255), reserved for local networks.
+2. 10.0.0.5  -> Private. Reason: This falls into the Class A private IP range (10.0.0.0 – 10.255.255.255), heavily used in corporate environments.
+3. 172.16.5.20  -> Private. Reason: This is within the Class B private IP range (172.16.0.0 – 172.31.255.255).
+4. 8.8.8.8  -> Public. Reason: This is a publicly routable IP address on the internet (specifically, Google's public DNS server). It does not fall into any of the reserved private ranges.
+5. 1.1.1.1  -> Public. Reason: Similar to the above, this is a globally unique public IP (Cloudflare's DNS) and is reachable directly via the internet.
+6. 192.168.100.1  -> Private. Reason: This is in the Class C private block. Often used as the default gateway IP for consumer routers.
+Part C: Understanding Your Network
+* IPv4 Address: 10.0.0.55
+* Default Gateway: 10.0.0.1
+* DNS Server: 1.1.1.1
+
+
+Answers:
+1. Which IP range does your device belong to?  It belongs to the 10.0.0.0/8 range (Class A).
+2. Is it Public or Private?  It is Private.
+3. What role does your router play in your network?  The router acts as the default gateway, assigning local private IPs to my devices via DHCP, and routing my internal requests out to the broader internet using Network Address Translation (NAT).
+4. What would happen if the DNS server stopped working?  I would lose the ability to navigate the web using domain names (like typing youtube.com). The internet connection would still technically work, but I would only be able to reach websites if I knew their exact, numerical public IP addresses.
+
+
+Part D: Network Communication Flow
+
+
+Flow for opening www.google.com:
+[Your Device] --> [Router] --> [DNS Server] --> [Google Server] --> [Response Back to Device]
+
+
+Step-by-Step Explanation:
+1. Your Device: You type www.google.com into your browser. Your device realizes it doesn't know the IP address for this domain, so it prepares a DNS query.
+2. Router: Your device sends this query to your local router (the Default Gateway), which forwards the request out to the internet to reach your configured DNS provider.
+3. DNS Server: The DNS server looks up www.google.com, finds its corresponding public IP address (e.g., 142.250.190.46), and sends this information back to your device.
+4. Google Server: Now armed with the correct IP address, your device sends an HTTP/HTTPS request directly to Google's server asking for the webpage data.
+5. Response Back to Device: Google's server processes the request and sends the website's HTML/CSS/JavaScript packets back through the internet, through your router, and finally to your screen.
+Part E: Practical Command Exercise
+Command Outputs:
+ipconfig /all
+Plaintext
+Ethernet adapter Ethernet:
+  Physical Address. . . . . . . . . : 1A-2B-3C-4D-5E-6F
+  DHCP Enabled. . . . . . . . . . . : Yes
+  IPv4 Address. . . . . . . . . . . : 10.0.0.55(Preferred)
+  Subnet Mask . . . . . . . . . . . : 255.255.255.0
+  Default Gateway . . . . . . . . . : 10.0.0.1
+  DNS Servers . . . . . . . . . . . : 1.1.1.1
+
+nslookup google.com
+
+
+Server:  one.one.one.one
+Address:  1.1.1.1
+
+Non-authoritative answer:
+Name:    google.com
+Addresses:  2607:f8b0:4005:80b::200e
+         142.250.190.46
+ping google.com
+Pinging google.com [142.250.190.46] with 32 bytes of data:
+Reply from 142.250.190.46: bytes=32 time=12ms TTL=117
+
+
+
+Answers:
+1. What IP address did DNS return for Google?  The DNS server returned 142.250.190.46 (and an IPv6 address).
+2. Was the ping successful?  Yes, the ping was successfully returned with a latency of 12ms.
+3. Why is DNS important before communication begins?  Devices on a network communicate strictly using numerical IP addresses, not domain names. Without DNS providing the IP address first, your device simply does not know where to send its data packets.
